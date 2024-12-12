@@ -2,7 +2,7 @@
 python3 -m torch.distributed.launch \
 --nproc_per_node=8 \
 train.py \
-/path/to/imagenet/ \
+/imagenet/data/ \
 --batch-size 128 \
 --pin-mem \
 --model transxnet_t \
@@ -15,4 +15,6 @@ train.py \
 --val-start-epoch 250 \
 --val-freq 50 \
 --native-amp \
---output /path/to/save-checkpoint/
+--output /imagenet/save-checkpoint/
+
+echo "Starting script..."
