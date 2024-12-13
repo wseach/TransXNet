@@ -1,8 +1,18 @@
 #!/usr/bin/env bash
-python3 -m torch.distributed.launch \
+
+if [ ! -f "train.py" ]; then
+    echo "Error: train.py not found!"
+    exit 1
+fi
+
+if [ ! -d "./output/save-checkpoint/" ]; then
+    mkdir -p ./output/save-checkpoint/
+fi
+
+"D:/software/coding/anaconda environment/tqsdk/python.exe" -m torchrun \
 --nproc_per_node=8 \
 train.py \
-/imagenet/data/ \
+/d/sufe/研二/毕业论文/code/data/train/ \
 --batch-size 128 \
 --pin-mem \
 --model transxnet_t \
@@ -15,6 +25,6 @@ train.py \
 --val-start-epoch 250 \
 --val-freq 50 \
 --native-amp \
---output /imagenet/save-checkpoint/
+--output ./save-checkpoint/
 
 echo "Starting script..."
